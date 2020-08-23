@@ -7,4 +7,5 @@ export const Colors = {
   secondaryDarkColor: '#4f9a94',
   primaryTextColor: '#ffffff',
   secondaryTextColor: '#fafafa',
+  white: '#ffffff',
 };
