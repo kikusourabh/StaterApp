@@ -91,10 +91,6 @@ function Login({navigation}) {
               }
             />
           </View>
-          <Text style={[Styles.Sub_Header_Text, styles.ForgotPassStyle]}>
-            Forgot password?
-          </Text>
-
           <TouchableOpacity onPress={CheckCredentials}>
             <View style={styles.LoginButton}>
               <Text style={[Styles.Header_Text, styles.LoginButtonText]}>
@@ -124,8 +120,6 @@ function Login({navigation}) {
           </View>
         </View>
       </View>
-      {/* <Text style={Styles.Norm_Text_Secondary}>Login</Text>
-       */}
     </SafeAreaView>
   );
 }
