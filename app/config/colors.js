@@ -8,4 +8,5 @@ export const Colors = {
   primaryTextColor: '#ffffff',
   secondaryTextColor: '#fafafa',
   white: '#ffffff',
+  error: '#ea5455',
 };

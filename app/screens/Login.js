@@ -11,7 +11,13 @@ import {Styles} from '../config/styles';
 import {Colors} from '../config/colors';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import {TextInput, TouchableOpacity} from 'react-native-gesture-handler';
+import * as Animatable from 'react-native-animatable';
+
 function Login({navigation}) {
+  const [isValid, setIsValid] = useState({
+    email: true,
+    pass: true,
+  });
   const [credentials, setCredentials] = useState({});
 
   const CheckCredentials = () => {
@@ -19,15 +25,46 @@ function Login({navigation}) {
     console.log('Email: ' + credentials.email);
     console.log('Password: ' + credentials.pass);
     console.log('====================================');
+    if (isValid.email && isValid.pass) {
+      navigation.navigate('Home');
+    }
   };
 
   const navigatToRegistration = () => {
     navigation.navigate('Registration');
   };
+
+  const checkPassword = (text) => {
+    if (
+      /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/.test(
+        text,
+      )
+    ) {
+      setCredentials({
+        email: credentials.email,
+        pass: text,
+      });
+      setIsValid({email: isValid.email, pass: true});
+    } else {
+      setIsValid({email: isValid.email, pass: false});
+    }
+  };
+
+  const checkEmail = (text) => {
+    if (/^[a-zA-Z0-9]+@(?:[a-zA-Z0-9]+\.)+[A-Za-z]+$/.test(text)) {
+      setIsValid({email: true, pass: isValid.pass});
+      setCredentials({
+        email: text,
+        pass: credentials.pass,
+      });
+    } else {
+      setIsValid({email: false, pass: isValid.pass});
+    }
+  };
   return (
     <SafeAreaView style={Styles.Window_Background}>
       <StatusBar
-        backgroundColor={Colors.secondaryTextColor}
+        backgroundColor={Colors.Window_Background}
         barStyle="dark-content"
       />
       <View
@@ -68,11 +105,15 @@ function Login({navigation}) {
               placeholderTextColor={Colors.primaryTextColor}
               keyboardType="email-address"
               autoCompleteType="email"
-              onChangeText={(text) =>
-                setCredentials({email: text, pass: credentials.pass})
-              }
+              onChangeText={(e) => checkEmail(e)}
             />
           </View>
+          {isValid.email ? null : (
+            <Animatable.View animation="fadeInLeft" duration={500}>
+              <Text style={styles.ErrorMsg}>Email is not valid</Text>
+            </Animatable.View>
+          )}
+
           <View style={styles.Card}>
             <Icon
               name="lock"
@@ -86,11 +127,15 @@ function Login({navigation}) {
               placeholderTextColor={Colors.primaryTextColor}
               secureTextEntry={true}
               autoCompleteType="password"
-              onChangeText={(text) =>
-                setCredentials({email: credentials.email, pass: text})
-              }
+              onChangeText={(e) => checkPassword(e)}
             />
           </View>
+          {isValid.pass ? null : (
+            <Animatable.View animation="fadeInLeft" duration={500}>
+              <Text style={styles.ErrorMsg}>Password is not valid</Text>
+            </Animatable.View>
+          )}
+
           <TouchableOpacity onPress={CheckCredentials}>
             <View style={styles.LoginButton}>
               <Text style={[Styles.Header_Text, styles.LoginButtonText]}>
@@ -138,6 +183,12 @@ const styles = StyleSheet.create({
     },
     marginTop: 10,
     flexDirection: 'row',
+  },
+  ErrorMsg: {
+    color: Colors.error,
+    marginStart: 20,
+    marginTop: 10,
+    fontWeight: 'bold',
   },
   FotterView: {
     flex: 2,
