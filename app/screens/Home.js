@@ -1,11 +1,37 @@
 import React from 'react';
-import {View, Text} from 'react-native';
+import {View, Text, SafeAreaView, StatusBar} from 'react-native';
 import {Styles} from '../config/styles';
+import {Colors} from '../config/colors';
 function Home() {
   return (
-    <View style={Styles.Window_Background}>
-      <Text style={Styles.Norm_Text_Primary}>Home</Text>
-    </View>
+    <SafeAreaView style={Styles.Window_Background}>
+      <StatusBar
+        backgroundColor={Colors.Window_Background}
+        barStyle="dark-content"
+      />
+      <View
+        style={{
+          flex: 1,
+          padding: 20,
+        }}>
+        <View
+          style={[
+            Styles.HeaderView,
+            {backgroundColor: Colors.primaryDarkColor},
+          ]}>
+          <Text style={Styles.Header_Text}>Header</Text>
+        </View>
+        <View
+          style={[
+            Styles.FotterView,
+            {backgroundColor: Colors.secondaryDarkColor},
+          ]}>
+          <Text style={[Styles.Header_Text, {color: Colors.primaryDarkColor}]}>
+            Fotter
+          </Text>
+        </View>
+      </View>
+    </SafeAreaView>
   );
 }
 
