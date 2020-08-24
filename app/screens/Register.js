@@ -5,6 +5,7 @@ import {Colors} from '../config/colors';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import {TextInput, TouchableOpacity} from 'react-native-gesture-handler';
 import * as Animatable from 'react-native-animatable';
+import AsyncStorage from '@react-native-community/async-storage';
 
 function Register({navigation}) {
   const [isValid, setIsValid] = useState({
@@ -21,10 +22,20 @@ function Register({navigation}) {
     console.log('Password: ' + credentials.pass);
     console.log('====================================');
     if (isValid.uname && isValid.email && isValid.pass) {
-      navigation.navigate('Login');
+      storeData();
     }
   };
 
+  const storeData = async () => {
+    try {
+      await AsyncStorage.setItem('uname', credentials.uname);
+      await AsyncStorage.setItem('email', credentials.email);
+      await AsyncStorage.setItem('pass', credentials.pass);
+      navigation.navigate('Login');
+    } catch (e) {
+      console.log('exception: ' + e);
+    }
+  };
   const navigatToRegistration = () => {
     navigation.navigate('Login');
   };

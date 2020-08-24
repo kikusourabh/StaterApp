@@ -1,10 +1,18 @@
-import React, {useState} from 'react';
-import {View, Text, StatusBar, SafeAreaView, Image} from 'react-native';
+import React, {useState, useEffect} from 'react';
+import {
+  View,
+  Text,
+  StatusBar,
+  SafeAreaView,
+  Image,
+  ActivityIndicator,
+} from 'react-native';
 import {Styles} from '../config/styles';
 import {Colors} from '../config/colors';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import {TextInput, TouchableOpacity} from 'react-native-gesture-handler';
 import * as Animatable from 'react-native-animatable';
+import AsyncStorage from '@react-native-community/async-storage';
 
 function Login({navigation}) {
   const [isValid, setIsValid] = useState({
@@ -19,7 +27,37 @@ function Login({navigation}) {
     console.log('Password: ' + credentials.pass);
     console.log('====================================');
     if (isValid.email && isValid.pass) {
-      navigation.navigate('Home');
+      getData();
+    }
+  };
+
+  const getData = async () => {
+    try {
+      const email = await AsyncStorage.getItem('email');
+      const pass = await AsyncStorage.getItem('pass');
+      if (email !== null && pass !== null) {
+        if (credentials.email === email) {
+          setIsValid({email: true, pass: isValid.pass});
+        } else {
+          setIsValid({email: false, pass: isValid.pass});
+        }
+        if (credentials.pass === pass) {
+          setIsValid({email: isValid.email, pass: true});
+        } else {
+          setIsValid({email: isValid.email, pass: false});
+        }
+        if (isValid.email && isValid.pass) {
+          try {
+            await AsyncStorage.setItem('token', credentials.uname + 'token');
+            navigation.navigate('Home');
+          } catch (e) {
+            console.log('Token store issue: ' + e);
+          }
+        }
+      }
+    } catch (e) {
+      // error reading value
+      console.log('checking issue: ' + e);
     }
   };
 
@@ -54,6 +92,7 @@ function Login({navigation}) {
       setIsValid({email: false, pass: isValid.pass});
     }
   };
+
   return (
     <SafeAreaView style={Styles.Window_Background}>
       <StatusBar
