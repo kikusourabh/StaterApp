@@ -1,19 +1,75 @@
-import React from 'react';
-import {View, Text, SafeAreaView, StatusBar, Platform} from 'react-native';
+import React, {useState, useEffect} from 'react';
+import {
+  StyleSheet,
+  View,
+  Text,
+  SafeAreaView,
+  StatusBar,
+  Platform,
+} from 'react-native';
 import {Styles} from '../config/styles';
 import {Colors} from '../config/colors';
+import Icon from 'react-native-vector-icons/MaterialIcons';
+import AsyncStorage from '@react-native-community/async-storage';
+import {TouchableOpacity} from 'react-native-gesture-handler';
 function Home() {
+  const [uname, setUname] = useState('');
+
+  useEffect(() => {
+    const getUname = async () => {
+      try {
+        const uname = await AsyncStorage.getItem('uname');
+        if (uname != null) {
+          setUname(uname);
+        } else {
+          setUname('no-username');
+        }
+      } catch (e) {
+        console.log('====================================');
+        console.log('error' + e);
+        console.log('====================================');
+        setUname('no-username');
+      }
+    };
+
+    getUname();
+  }, []);
   return (
-    <SafeAreaView style={Styles.Window_Background}>
+    <View style={Styles.Window_Background}>
       <StatusBar
         backgroundColor={
           Platform.OS === 'android'
             ? Colors.primaryDarkColor
             : Colors.Window_Background
         }
-        barStyle="dark-content"
+        barStyle="light-content"
       />
-      {/* <View style={ActionBar} */}
+      <View style={styles.ActionBar}>
+        <View
+          style={{
+            flex: 2,
+            flexDirection: 'row',
+          }}>
+          <Icon name="person" size={20} color={Colors.white} />
+          <Text style={[Styles.Header_Text, styles.ActionTitle]}>{uname}</Text>
+        </View>
+        <View
+          style={{
+            flex: 1,
+            flexDirection: 'row',
+            justifyContent: 'flex-end',
+            alignItems: 'flex-end',
+          }}>
+          <TouchableOpacity>
+            <Icon
+              style={{alignSelf: 'flex-end'}}
+              name="exit-to-app"
+              size={20}
+              color={Colors.white}
+            />
+          </TouchableOpacity>
+        </View>
+      </View>
       <View
         style={{
           flex: 1,
@@ -36,8 +92,22 @@ function Home() {
           </Text>
         </View>
       </View>
-    </SafeAreaView>
+    </View>
   );
 }
 
+const styles = StyleSheet.create({
+  ActionBar: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingStart: 16,
+    paddingEnd: 16,
+    paddingTop: Platform.OS === 'ios' ? 35 : 0,
+    height: Platform.OS === 'ios' ? 100 : 56,
+    backgroundColor: Colors.primaryColor,
+  },
+  ActionTitle: {
+    marginStart: 16,
+  },
+});
 export default Home;
