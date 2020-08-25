@@ -13,8 +13,10 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import {TextInput, TouchableOpacity} from 'react-native-gesture-handler';
 import * as Animatable from 'react-native-animatable';
 import AsyncStorage from '@react-native-community/async-storage';
+import {AuthContext} from '../components/context';
 
 function Login({navigation}) {
+  const {setLoginState} = React.useContext(AuthContext);
   const [isValid, setIsValid] = useState({
     email: true,
     pass: true,
@@ -49,7 +51,8 @@ function Login({navigation}) {
         if (isValid.email && isValid.pass) {
           try {
             await AsyncStorage.setItem('token', credentials.uname + 'token');
-            navigation.navigate('Home');
+            // navigation.navigate('Home');
+            setLoginState(true);
           } catch (e) {
             console.log('Token store issue: ' + e);
           }
