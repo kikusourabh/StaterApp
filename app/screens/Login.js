@@ -72,6 +72,8 @@ function Login({navigation}) {
   };
 
   const navigatToRegistration = () => {
+    setCredentials({email: '', pass: ''});
+    setIsValid({email: true, pass: true});
     navigation.navigate('Registration');
   };
 
@@ -149,6 +151,7 @@ function Login({navigation}) {
               autoCompleteType="email"
               clearButtonMode="while-editing"
               onChangeText={(e) => checkEmail(e)}
+              value={credentials.email}
             />
           </View>
           {isValid.email ? null : (
@@ -172,6 +175,7 @@ function Login({navigation}) {
               autoCompleteType="password"
               clearButtonMode="while-editing"
               onChangeText={(e) => checkPassword(e)}
+              value={credentials.pass}
             />
           </View>
           {isValid.pass ? null : (
