@@ -18,7 +18,10 @@ function MainNav() {
     const check = async () => {
       try {
         const token = await AsyncStorage.getItem('token');
-        if (token !== null) {
+        console.log('====================================');
+        console.log('token' + token != null);
+        console.log('====================================');
+        if (token != null) {
           setIsLogin(true);
         } else {
           setIsLogin(false);
@@ -31,13 +34,16 @@ function MainNav() {
     check();
   }, []);
 
-  const loginState = React.useMemo(() => ({
+  const authContext = React.useMemo(() => ({
     setLoginState: (isCorrect) => {
       if (isCorrect) {
         setIsLogin(true);
       } else {
         setIsLogin(false);
       }
+    },
+    setLogOutState: () => {
+      setIsLogin(false);
     },
   }));
 
@@ -49,7 +55,7 @@ function MainNav() {
     );
   }
   return (
-    <AuthContext.Provider value={loginState}>
+    <AuthContext.Provider value={authContext}>
       <NavigationContainer>
         {isLogin == true ? (
           <Stack.Navigator headerMode="none">

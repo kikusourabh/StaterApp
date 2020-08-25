@@ -1,20 +1,24 @@
 import React, {useState, useEffect} from 'react';
-import {
-  StyleSheet,
-  View,
-  Text,
-  SafeAreaView,
-  StatusBar,
-  Platform,
-} from 'react-native';
+import {StyleSheet, View, Text, StatusBar, Platform} from 'react-native';
 import {Styles} from '../config/styles';
 import {Colors} from '../config/colors';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import AsyncStorage from '@react-native-community/async-storage';
 import {TouchableOpacity} from 'react-native-gesture-handler';
+import {AuthContext} from '../components/context';
+
 function Home() {
   const [uname, setUname] = useState('');
+  const {setLogOutState} = React.useContext(AuthContext);
 
+  const logout = async () => {
+    try {
+      await AsyncStorage.removeItem('token');
+      setLogOutState();
+    } catch (e) {
+      console.log('exception-logut: ' + e);
+    }
+  };
   useEffect(() => {
     const getUname = async () => {
       try {
@@ -60,7 +64,7 @@ function Home() {
             justifyContent: 'flex-end',
             alignItems: 'flex-end',
           }}>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={logout}>
             <Icon
               style={{alignSelf: 'flex-end'}}
               name="exit-to-app"

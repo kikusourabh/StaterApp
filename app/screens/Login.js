@@ -5,7 +5,8 @@ import {
   StatusBar,
   SafeAreaView,
   Image,
-  ActivityIndicator,
+  Alert,
+  Platform,
 } from 'react-native';
 import {Styles} from '../config/styles';
 import {Colors} from '../config/colors';
@@ -37,7 +38,7 @@ function Login({navigation}) {
     try {
       const email = await AsyncStorage.getItem('email');
       const pass = await AsyncStorage.getItem('pass');
-      if (email !== null && pass !== null) {
+      if (email != null && pass != null) {
         if (credentials.email === email) {
           setIsValid({email: true, pass: isValid.pass});
         } else {
@@ -57,6 +58,12 @@ function Login({navigation}) {
             console.log('Token store issue: ' + e);
           }
         }
+      } else {
+        Alert.alert(
+          'Login',
+          credentials.email + ' not found you need to sing up first',
+          [{text: 'OK'}],
+        );
       }
     } catch (e) {
       // error reading value
@@ -99,7 +106,7 @@ function Login({navigation}) {
   return (
     <SafeAreaView style={Styles.Window_Background}>
       <StatusBar
-        backgroundColor={Colors.Window_Background}
+        backgroundColor={Colors.secondaryTextColor}
         barStyle="dark-content"
       />
       <View
@@ -140,6 +147,7 @@ function Login({navigation}) {
               placeholderTextColor={Colors.primaryTextColor}
               keyboardType="email-address"
               autoCompleteType="email"
+              clearButtonMode="while-editing"
               onChangeText={(e) => checkEmail(e)}
             />
           </View>
@@ -162,6 +170,7 @@ function Login({navigation}) {
               placeholderTextColor={Colors.primaryTextColor}
               secureTextEntry={true}
               autoCompleteType="password"
+              clearButtonMode="while-editing"
               onChangeText={(e) => checkPassword(e)}
             />
           </View>

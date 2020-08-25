@@ -85,7 +85,7 @@ function Register({navigation}) {
   return (
     <SafeAreaView style={Styles.Window_Background}>
       <StatusBar
-        backgroundColor={Colors.Window_Background}
+        backgroundColor={Colors.secondaryTextColor}
         barStyle="dark-content"
       />
       <View
@@ -126,6 +126,7 @@ function Register({navigation}) {
               placeholderTextColor={Colors.primaryTextColor}
               keyboardType="default"
               autoCompleteType="name"
+              clearButtonMode="while-editing"
               onChangeText={(e) => checkUname(e)}
             />
           </View>
@@ -147,6 +148,7 @@ function Register({navigation}) {
               placeholderTextColor={Colors.primaryTextColor}
               keyboardType="email-address"
               autoCompleteType="email"
+              clearButtonMode="while-editing"
               onChangeText={(e) => checkEmail(e)}
             />
           </View>
@@ -168,6 +170,7 @@ function Register({navigation}) {
               style={Styles.InputStyle}
               placeholderTextColor={Colors.primaryTextColor}
               secureTextEntry={true}
+              clearButtonMode="while-editing"
               autoCompleteType="password"
               onChangeText={(e) => checkPassword(e)}
             />
