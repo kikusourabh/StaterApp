@@ -1,14 +1,19 @@
 import React from 'react';
-import {View, Text, SafeAreaView, StatusBar} from 'react-native';
+import {View, Text, SafeAreaView, StatusBar, Platform} from 'react-native';
 import {Styles} from '../config/styles';
 import {Colors} from '../config/colors';
 function Home() {
   return (
     <SafeAreaView style={Styles.Window_Background}>
       <StatusBar
-        backgroundColor={Colors.Window_Background}
+        backgroundColor={
+          Platform.OS === 'android'
+            ? Colors.primaryDarkColor
+            : Colors.Window_Background
+        }
         barStyle="dark-content"
       />
+      {/* <View style={ActionBar} */}
       <View
         style={{
           flex: 1,
