@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {View, Text, StatusBar, SafeAreaView, Image} from 'react-native';
+import {View, Text, StatusBar, SafeAreaView, Image, Alert} from 'react-native';
 import {Styles} from '../config/styles';
 import {Colors} from '../config/colors';
 import Icon from 'react-native-vector-icons/MaterialIcons';
@@ -22,7 +22,52 @@ function Register({navigation}) {
     console.log('Password: ' + credentials.pass);
     console.log('====================================');
     if (isValid.uname && isValid.email && isValid.pass) {
-      storeData();
+      checkUserExist(credentials.uname, credentials.email);
+    }
+  };
+
+  const checkUserExist = async (username, useremail) => {
+    try {
+      const uname = await AsyncStorage.getItem('uname');
+      const email = await AsyncStorage.getItem('email');
+      if (uname != null && email != null) {
+        let user = {uname: false, email: false};
+        if (uname == username) {
+          user.uname = true;
+        }
+        if (email == useremail) {
+          user.email = true;
+        }
+
+        if (user.uname && user.email) {
+          Alert.alert(
+            'Login',
+            username +
+              ',' +
+              useremail +
+              ' are already there you need to login with these credentials',
+            [{text: 'OK'}],
+          );
+        } else if (user.uname) {
+          Alert.alert(
+            'Login',
+            username + ' is already there you need to try different user name',
+            [{text: 'OK'}],
+          );
+        } else if (user.email) {
+          Alert.alert(
+            'Login',
+            useremail + ' is already there you need to try different email',
+            [{text: 'OK'}],
+          );
+        } else {
+          storeData();
+        }
+      } else {
+        storeData();
+      }
+    } catch (e) {
+      console.log('exception: ' + e);
     }
   };
 

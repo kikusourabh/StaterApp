@@ -39,36 +39,40 @@ function Login({navigation}) {
       const email = await AsyncStorage.getItem('email');
       const pass = await AsyncStorage.getItem('pass');
       if (email != null && pass != null) {
+        let isCredentailCorrect = false;
         if (credentials.email === email) {
-          setIsValid({email: true, pass: isValid.pass});
+          if (credentials.pass === pass) {
+            isCredentailCorrect = true;
+          } else {
+            isCredentailCorrect = false;
+          }
         } else {
-          setIsValid({email: false, pass: isValid.pass});
+          isCredentailCorrect = false;
         }
-        if (credentials.pass === pass) {
-          setIsValid({email: isValid.email, pass: true});
-        } else {
-          setIsValid({email: isValid.email, pass: false});
-        }
-        if (isValid.email && isValid.pass) {
+        if (isCredentailCorrect) {
           try {
             await AsyncStorage.setItem('token', credentials.uname + 'token');
-            // navigation.navigate('Home');
             setLoginState(true);
           } catch (e) {
             console.log('Token store issue: ' + e);
           }
+        } else {
+          showAlert();
         }
       } else {
-        Alert.alert(
-          'Login',
-          credentials.email + ' not found you need to sing up first',
-          [{text: 'OK'}],
-        );
+        showAlert();
       }
     } catch (e) {
       // error reading value
       console.log('checking issue: ' + e);
     }
+  };
+  const showAlert = () => {
+    Alert.alert(
+      'Login',
+      credentials.email + ' not found you need to sing up first',
+      [{text: 'OK'}],
+    );
   };
 
   const navigatToRegistration = () => {
