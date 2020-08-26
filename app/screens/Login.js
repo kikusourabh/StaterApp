@@ -4,7 +4,11 @@ import {View, Text, StatusBar, SafeAreaView, Image, Alert} from 'react-native';
 import {Styles} from '../config/styles';
 import {Colors} from '../config/colors';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import {TextInput, TouchableOpacity} from 'react-native-gesture-handler';
+import {
+  TextInput,
+  TouchableOpacity,
+  ScrollView,
+} from 'react-native-gesture-handler';
 import * as Animatable from 'react-native-animatable';
 import AsyncStorage from '@react-native-community/async-storage';
 import {AuthContext} from '../components/context';
@@ -121,6 +125,7 @@ function Login({navigation}) {
         backgroundColor={Colors.secondaryTextColor}
         barStyle="dark-content"
       />
+
       <View
         style={{
           flex: 1,
