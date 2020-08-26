@@ -83,10 +83,34 @@ function Home() {
       <View
         style={{
           flex: 1,
-          padding: 20,
         }}>
         {/* body */}
-        <Tab.Navigator>
+        <Tab.Navigator
+          screenOptions={({route}) => ({
+            tabBarIcon: ({focused, color, size}) => {
+              return (
+                <Icon
+                  style={{
+                    marginTop: 8,
+                  }}
+                  name={route.name == 'Quotes' ? 'format-quote' : 'widgets'}
+                  size={20}
+                  color={color}
+                />
+              );
+            },
+          })}
+          tabBarOptions={{
+            activeTintColor: Colors.primaryColor,
+            inactiveTintColor: Colors.secondaryColor,
+            labelStyle: {
+              fontSize: 18,
+              marginBottom: 8,
+            },
+            style: {
+              height: Platform.OS == 'ios' ? 100 : 66,
+            },
+          }}>
           <Tab.Screen name="Quotes" component={QuoteListTab} />
           <Tab.Screen name="Category Quotes" component={CategoryQuotesTab} />
         </Tab.Navigator>
