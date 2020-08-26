@@ -11,11 +11,17 @@ import {Styles} from '../config/styles';
 import Axios from 'react-native-axios';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import {Colors} from '../config/colors';
+import Clipboard from '@react-native-community/clipboard';
 
 function QuoteListTab() {
   const [data, setData] = useState([]);
 
-  const copyQuote = () => {};
+  const copyQuote = (text) => {
+    console.log('Copy:' + text);
+
+    Clipboard.setString(text);
+  };
+
   const QuotesItem = ({item}) => {
     return (
       <View style={styles.Item}>
@@ -26,7 +32,9 @@ function QuoteListTab() {
           </Text>
         </View>
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-          <TouchableOpacity style={styles.ItemCopy} onPress={copyQuote}>
+          <TouchableOpacity
+            style={styles.ItemCopy}
+            onPress={() => copyQuote(item.text)}>
             <Icon name="content-copy" size={30} color={Colors.white} />
           </TouchableOpacity>
         </View>
@@ -37,17 +45,19 @@ function QuoteListTab() {
     return <View style={styles.ItemSeparator}></View>;
   };
   useEffect(() => {
-    Axios.get(
-      'https://raw.githubusercontent.com/kikusourabh/QuotesStore/master/Quotes/QuotesList.json',
-    )
-      .then((res) => setData(res.data))
-      .catch((err) => {
-        console.log('error axios:' + err);
-      });
-  });
+    const fetchData = async () => {
+      Axios.get(
+        'https://raw.githubusercontent.com/kikusourabh/QuotesStore/master/Quotes/QuotesList.json',
+      )
+        .then((res) => setData(res.data))
+        .catch((err) => {
+          console.log('error axios:' + err);
+        });
+    };
+    fetchData();
+  }, []);
   return (
     <View style={Styles.Window_Background}>
-      {console.log('data-flat: ' + data)}
       <FlatList
         data={data}
         keyExtractor={({key}) => key.toString()}
