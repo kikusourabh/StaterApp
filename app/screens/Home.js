@@ -6,7 +6,11 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import AsyncStorage from '@react-native-community/async-storage';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import {AuthContext} from '../components/context';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import QuoteListTab from './QuoteListTab';
+import CategoryQuotesTab from './CategoryQuotesTab';
 
+const Tab = createBottomTabNavigator();
 function Home() {
   const [uname, setUname] = useState('');
   const {setLogOutState} = React.useContext(AuthContext);
@@ -49,6 +53,7 @@ function Home() {
         }
         barStyle="light-content"
       />
+      {/* action bar */}
       <View style={styles.ActionBar}>
         <View
           style={{
@@ -80,22 +85,11 @@ function Home() {
           flex: 1,
           padding: 20,
         }}>
-        <View
-          style={[
-            Styles.HeaderView,
-            {backgroundColor: Colors.primaryDarkColor},
-          ]}>
-          <Text style={Styles.Header_Text}>Header</Text>
-        </View>
-        <View
-          style={[
-            Styles.FotterView,
-            {backgroundColor: Colors.secondaryDarkColor},
-          ]}>
-          <Text style={[Styles.Header_Text, {color: Colors.primaryDarkColor}]}>
-            Fotter
-          </Text>
-        </View>
+        {/* body */}
+        <Tab.Navigator>
+          <Tab.Screen name="Quotes" component={QuoteListTab} />
+          <Tab.Screen name="Category Quotes" component={CategoryQuotesTab} />
+        </Tab.Navigator>
       </View>
     </View>
   );
