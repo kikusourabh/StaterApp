@@ -7,25 +7,28 @@ import {TextInput, TouchableOpacity} from 'react-native-gesture-handler';
 import * as Animatable from 'react-native-animatable';
 import AsyncStorage from '@react-native-community/async-storage';
 
+// Register Component of MainNav stack navigation
 function Register({navigation}) {
+  // States for user name, email and password
+  // are valid or not
   const [isValid, setIsValid] = useState({
     uname: true,
     email: true,
     pass: true,
   });
+
+  // State to store all the details of user
   const [credentials, setCredentials] = useState({});
 
+  // This function is for checking the user details
+  // are correctly entrer then check the user is alredy exist or not
   const CheckCredentials = () => {
-    console.log('====================================');
-    console.log('Uname: ' + credentials.uname);
-    console.log('Email: ' + credentials.email);
-    console.log('Password: ' + credentials.pass);
-    console.log('====================================');
     if (isValid.uname && isValid.email && isValid.pass) {
       checkUserExist(credentials.uname, credentials.email);
     }
   };
 
+  // check the user is alredy exist or not
   const checkUserExist = async (username, useremail) => {
     try {
       const uname = await AsyncStorage.getItem('uname');
@@ -71,6 +74,7 @@ function Register({navigation}) {
     }
   };
 
+  // store the user detail in asyncstorage
   const storeData = async () => {
     try {
       await AsyncStorage.setItem('uname', credentials.uname);
@@ -81,10 +85,13 @@ function Register({navigation}) {
       console.log('exception: ' + e);
     }
   };
+
+  // onPress of Login text
   const navigatToRegistration = () => {
     navigation.navigate('Login');
   };
 
+  // validation of password
   const checkPassword = (text) => {
     if (
       /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/.test(
@@ -102,6 +109,7 @@ function Register({navigation}) {
     }
   };
 
+  // validation of email
   const checkEmail = (text) => {
     if (/^[a-zA-Z0-9]+@(?:[a-zA-Z0-9]+\.)+[A-Za-z]+$/.test(text)) {
       setIsValid({uname: isValid.uname, email: true, pass: isValid.pass});
@@ -114,6 +122,8 @@ function Register({navigation}) {
       setIsValid({uname: isValid.uname, email: false, pass: isValid.pass});
     }
   };
+
+  // validation of user name
   const checkUname = (text) => {
     if (/^[A-Za-z0-9]+(?:[_-][A-Za-z0-9]+)*.{8,}$/.test(text)) {
       setIsValid({uname: true, email: isValid.email, pass: isValid.pass});

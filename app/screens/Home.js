@@ -38,6 +38,7 @@ function Home() {
 
     getUname();
   }, []);
+
   return (
     <View style={Styles.Window_Background}>
       <StatusBar

@@ -1,13 +1,6 @@
 import React, {useState, useEffect} from 'react';
-import {
-  View,
-  Text,
-  StatusBar,
-  SafeAreaView,
-  Image,
-  Alert,
-  Platform,
-} from 'react-native';
+import {View, Text, StatusBar, SafeAreaView, Image, Alert} from 'react-native';
+
 import {Styles} from '../config/styles';
 import {Colors} from '../config/colors';
 import Icon from 'react-native-vector-icons/MaterialIcons';
@@ -16,28 +9,35 @@ import * as Animatable from 'react-native-animatable';
 import AsyncStorage from '@react-native-community/async-storage';
 import {AuthContext} from '../components/context';
 
+// Login Component of MainNav stack navigation
 function Login({navigation}) {
+  //context method to access MainNav states
   const {setLoginState} = React.useContext(AuthContext);
+
+  //state to check email and password are valid or not
   const [isValid, setIsValid] = useState({
     email: true,
     pass: true,
   });
+
+  //State to store the credentials
   const [credentials, setCredentials] = useState({});
 
+  // this Method check the credentials are valid or not
+  // and store them in async storage
   const CheckCredentials = () => {
-    console.log('====================================');
-    console.log('Email: ' + credentials.email);
-    console.log('Password: ' + credentials.pass);
-    console.log('====================================');
     if (isValid.email && isValid.pass) {
       getData();
     }
   };
 
+  // This method check the credential
+  // are correct or not
   const getData = async () => {
     try {
       const email = await AsyncStorage.getItem('email');
       const pass = await AsyncStorage.getItem('pass');
+
       if (email != null && pass != null) {
         let isCredentailCorrect = false;
         if (credentials.email === email) {
@@ -67,6 +67,9 @@ function Login({navigation}) {
       console.log('checking issue: ' + e);
     }
   };
+
+  // This function is to show the alert dialog
+  // about user credentials are not found
   const showAlert = () => {
     Alert.alert(
       'Login',
@@ -75,10 +78,13 @@ function Login({navigation}) {
     );
   };
 
+  // onPress of sing up text
   const navigatToRegistration = () => {
     navigation.navigate('Registration');
   };
 
+  // validation for password
+  // using regular expression
   const checkPassword = (text) => {
     if (
       /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/.test(
@@ -95,6 +101,8 @@ function Login({navigation}) {
     }
   };
 
+  // validation for Email
+  // using regular expression
   const checkEmail = (text) => {
     if (/^[a-zA-Z0-9]+@(?:[a-zA-Z0-9]+\.)+[A-Za-z]+$/.test(text)) {
       setIsValid({email: true, pass: isValid.pass});
