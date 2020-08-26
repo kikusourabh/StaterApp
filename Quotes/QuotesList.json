@@ -1,82 +1,103 @@
 "quotes":[
     {
+
+        "key":1
         "text":"1 year = 365 opportunities",
-        "img":"quote_1.jpeg"
+        "img":"https://raw.githubusercontent.com/kikusourabh/StaterApp/home-Quotes/Quotes/quotes_imagesgquote_1.jpeg"
     },
     {
+        "key":2
         "text":"FEAR",
-        "img":"quote_2.jpeg"
+        "img":"https://raw.githubusercontent.com/kikusourabh/StaterApp/home-Quotes/Quotes/quotes_imagesgquote_2.jpeg"
     },
     {
+        "key":3
         "text":"I don't know where I'm going but I'm on my way",
-        "img":"quote_3.jpeg"
+        "img":"https://raw.githubusercontent.com/kikusourabh/StaterApp/home-Quotes/Quotes/quotes_imagesgquote_3.jpeg"
     },
     {
+        "key":4
         "text":"Keep it simple keep it honest keep it real",
-        "img":"quote_4.jpeg"
+        "img":"https://raw.githubusercontent.com/kikusourabh/StaterApp/home-Quotes/Quotes/quotes_imagesgquote_4.jpeg"
     },
     {
+        "key":5
         "text":"Realize how blessed you are",
-        "img":"quote_5.jpeg"
+        "img":"https://raw.githubusercontent.com/kikusourabh/StaterApp/home-Quotes/Quotes/quotes_imagesgquote_5.jpeg"
     },
     {
+        "key":6
         "text":"We are what we belive we are",
-        "img":"quote_6.jpeg"
+        "img":"https://raw.githubusercontent.com/kikusourabh/StaterApp/home-Quotes/Quotes/quotes_imagesgquote_6.jpeg"
     },
     {
+        "key":7
         "text":"Don't be afraid to fail. Be afraid not to try",
-        "img":"quote_7.jpeg"
+        "img":"https://raw.githubusercontent.com/kikusourabh/StaterApp/home-Quotes/Quotes/quotes_imagesgquote_7.jpeg"
     },
     {
+        "key":8
         "text":"See the posibility, not the problem",
-        "img":"quote_8.jpeg"
+        "img":"https://raw.githubusercontent.com/kikusourabh/StaterApp/home-Quotes/Quotes/quotes_imagesgquote_8.jpeg"
     },
     {
+        "key":9
         "text":"Take the risk, or lose the chance",
-        "img":"quote_9.jpeg"
+        "img":"https://raw.githubusercontent.com/kikusourabh/StaterApp/home-Quotes/Quotes/quotes_imagesgquote_9.jpeg"
     },
     {
+        "key":10
         "text":"If there is no struggle, there is no progress",
-        "img":"quote_10.jpeg"
+        "img":"https://raw.githubusercontent.com/kikusourabh/StaterApp/home-Quotes/Quotes/quotes_images/quote_10.jpeg"
     },
     {
+        "key":11
         "text":"Dreames don't work unless you do",
-        "img":"quote_11.jpeg"
+        "img":"https://raw.githubusercontent.com/kikusourabh/StaterApp/home-Quotes/Quotes/quotes_images/quote_11.jpeg"
     },
     {
+        "key":12
         "text":"Make yourself proud",
-        "img":"quote_12.jpeg"
+        "img":"https://raw.githubusercontent.com/kikusourabh/StaterApp/home-Quotes/Quotes/quotes_images/quote_12.jpeg"
     },
     {
+        "key":13
         "text":"I'm doing this for me",
-        "img":"quote_13.jpeg"
+        "img":"https://raw.githubusercontent.com/kikusourabh/StaterApp/home-Quotes/Quotes/quotes_images/quote_13.jpeg"
     },
     {
+        "key":14
         "text":"Remember why you started",
-        "img":"quote_14.jpeg"
+        "img":"https://raw.githubusercontent.com/kikusourabh/StaterApp/home-Quotes/Quotes/quotes_images/quote_14.jpeg"
     },
     {
+        "key":15
         "text":"Focus on your goals",
-        "img":"quote_15.jpeg"
+        "img":"https://raw.githubusercontent.com/kikusourabh/StaterApp/home-Quotes/Quotes/quotes_images/quote_15.jpeg"
     },
     {
+        "key":16
         "text":"I can and I will",
-        "img":"quote_16.jpeg"
+        "img":"https://raw.githubusercontent.com/kikusourabh/StaterApp/home-Quotes/Quotes/quotes_images/quote_16.jpeg"
     },
     {
+        "key":17
         "text":"Work Hard",
-        "img":"quote_17.jpeg"
+        "img":"https://raw.githubusercontent.com/kikusourabh/StaterApp/home-Quotes/Quotes/quotes_images/quote_17.jpeg"
     },
     {
+        "key":18
         "text":"I'm not telling you it's going to be easy, I'm telling you it's going to be worth it ",
-        "img":"quote_18.jpeg"
+        "img":"https://raw.githubusercontent.com/kikusourabh/StaterApp/home-Quotes/Quotes/quotes_images/quote_18.jpeg"
     },
     {
+        "key":19
         "text":"Today is goona be a good day, and here's why: because today at least you're you and that's enough",
-        "img":"quote_19.jpeg"
+        "img":"https://raw.githubusercontent.com/kikusourabh/StaterApp/home-Quotes/Quotes/quotes_images/quote_19.jpeg"
     },
     {
+        "key":20
         "text":"If you want to fly, give up everything that weighs you down",
-        "img":"quote_20.jpeg"
+        "img":"https://raw.githubusercontent.com/kikusourabh/StaterApp/home-Quotes/Quotes/quotes_images/quote_20.jpeg"
     },
 ]
