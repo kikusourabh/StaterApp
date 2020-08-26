@@ -19,7 +19,7 @@ function QuoteListTab() {
   };
   useEffect(() => {
     Axios.get(
-      'https://raw.githubusercontent.com/kikusourabh/StaterApp/home-flatlist/Quotes/QuotesList.json',
+      'https://github.com/kikusourabh/StaterApp/blob/home-flatlist/Quotes/QuotesList.json',
     )
       .then((res) => setData(res.data))
       .catch((err) => {
