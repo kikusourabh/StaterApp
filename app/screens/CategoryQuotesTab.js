@@ -6,6 +6,7 @@ import Axios from 'react-native-axios';
 import {Colors} from '../config/colors';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import {TouchableOpacity} from 'react-native-gesture-handler';
+import Clipboard from '@react-native-community/clipboard';
 
 function CategoryQuotesTab() {
   const [isloading, setIsLoading] = useState(true);
@@ -29,6 +30,12 @@ function CategoryQuotesTab() {
     };
     fetchData();
   }, []);
+
+  const copyQuote = (text) => {
+    console.log('Copy:' + text);
+
+    Clipboard.setString(text);
+  };
 
   const QuotesItem = ({item}) => {
     return (
