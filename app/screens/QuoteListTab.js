@@ -22,28 +22,27 @@ function QuoteListTab() {
     Clipboard.setString(text);
   };
 
+  const QuotesItemSeparator = () => {
+    return <View style={Styles.ItemSeparator} />;
+  };
   const QuotesItem = ({item}) => {
     return (
-      <View style={styles.Item}>
+      <View style={Styles.Item}>
         <View style={{flex: 3, flexDirection: 'row'}}>
-          <Image style={styles.ItemImg} source={{uri: item.img}} />
-          <Text numberOfLines={4} style={styles.ItemText}>
+          <Image style={Styles.ItemImg} source={{uri: item.img}} />
+          <Text numberOfLines={4} style={Styles.ItemText}>
             {item.text}
           </Text>
         </View>
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-          <TouchableOpacity
-            style={styles.ItemCopy}
-            onPress={() => copyQuote(item.text)}>
+          <TouchableOpacity onPress={() => copyQuote(item.text)}>
             <Icon name="content-copy" size={30} color={Colors.white} />
           </TouchableOpacity>
         </View>
       </View>
     );
   };
-  const QuotesItemSeparator = () => {
-    return <View style={styles.ItemSeparator}></View>;
-  };
+
   useEffect(() => {
     const fetchData = async () => {
       Axios.get(
@@ -67,29 +66,4 @@ function QuoteListTab() {
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  Item: {
-    height: 100,
-    backgroundColor: Colors.primaryLightColor,
-    flexDirection: 'row',
-  },
-  ItemSeparator: {
-    height: 8,
-    backgroundColor: Colors.secondaryColor,
-  },
-  ItemImg: {
-    height: 100,
-    width: 100,
-  },
-  ItemText: {
-    color: Colors.primaryTextColor,
-    marginStart: 16,
-    marginEnd: 8,
-    width: 200,
-    fontSize: 18,
-    alignSelf: 'center',
-  },
-  ItemCopy: {},
-});
 export default QuoteListTab;

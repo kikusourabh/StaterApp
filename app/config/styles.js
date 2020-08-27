@@ -101,4 +101,26 @@ export const Styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'flex-end',
   },
+
+  Item: {
+    height: 100,
+    backgroundColor: Colors.primaryLightColor,
+    flexDirection: 'row',
+  },
+  ItemImg: {
+    height: 100,
+    width: 100,
+  },
+  ItemText: {
+    color: Colors.primaryTextColor,
+    marginStart: 16,
+    marginEnd: 8,
+    width: 200,
+    fontSize: 18,
+    alignSelf: 'center',
+  },
+  ItemSeparator: {
+    height: 8,
+    backgroundColor: Colors.secondaryColor,
+  },
 });
